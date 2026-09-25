@@ -95,6 +95,17 @@
     }
   }
 
+  // Faaliyet takvimi: geçmiş faaliyetleri ayır
+  document.querySelectorAll('[data-takvim]').forEach(function (t) {
+    var yaklasan = t.querySelector('[data-yaklasan]');
+    var gecmis = t.querySelector('[data-gecmis]');
+    var ogeler = Array.prototype.slice.call(yaklasan.querySelectorAll('.takvim-oge'));
+    var gecmisler = ogeler.filter(function (o) { var g = gunFarki(o.getAttribute('data-tarih')); return g !== null && g < 0; });
+    gecmisler.reverse().forEach(function (o) { gecmis.appendChild(o); });
+    if (gecmisler.length) t.querySelector('[data-gecmis-kutu]').hidden = false;
+    if (gecmisler.length === ogeler.length) t.querySelector('[data-yaklasan-yok]').hidden = false;
+  });
+
   // Sayaçlar: görünür olunca sayarak artsın
   var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var sayilar = document.querySelectorAll('.sayac-sayi');
@@ -130,8 +141,9 @@
     }
     function baslat() { if (!azHareket) zamanlayici = setInterval(function () { goster(i + 1); }, 6000); }
     function durdur() { clearInterval(zamanlayici); }
-    k.querySelector('[data-onceki]').addEventListener('click', function () { durdur(); goster(i - 1); });
-    k.querySelector('[data-sonraki]').addEventListener('click', function () { durdur(); goster(i + 1); });
+    var onceki = k.querySelector('[data-onceki]'), sonraki = k.querySelector('[data-sonraki]');
+    if (onceki) onceki.addEventListener('click', function () { durdur(); goster(i - 1); });
+    if (sonraki) sonraki.addEventListener('click', function () { durdur(); goster(i + 1); });
     k.addEventListener('mouseenter', durdur);
     k.addEventListener('focusin', durdur);
     goster(0);
