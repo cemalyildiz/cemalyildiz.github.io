@@ -35,7 +35,7 @@ collections:
     sortable_fields: [son_tarih, title, date]
     fields:
       - { label: Çağrı adı, name: title, widget: string }
-      - { label: Program türü, name: tur, widget: select, options: [TÜBİTAK, Uluslararası, Diğer] }
+      - { label: Program türü, name: tur, widget: select, options: [TÜBİTAK, Uluslararası, Girişimcilik Fırsatı, Diğer] }
       - { label: Son başvuru tarihi, name: son_tarih, widget: datetime, format: "YYYY-MM-DD", time_format: false }
       - { label: Destek bilgisi, name: destek, widget: string, required: false }
       - { label: Kimler başvurabilir, name: hedef, widget: string, required: false }
@@ -83,6 +83,86 @@ collections:
       - { label: Görsel, name: gorsel, widget: image, required: false }
       - { label: Ayrıntılar, name: body, widget: markdown, required: false }
 
+  - name: blog
+    label: Blog
+    label_singular: Blog yazısı
+    folder: _blog
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Başlık, name: title, widget: string }
+      - { label: Tarih, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - { label: Yazar, name: yazar, widget: string, required: false }
+      - { label: Kısa özet, name: ozet, widget: text, required: false }
+      - { label: Kapak görseli, name: gorsel, widget: image, required: false }
+      - { label: İçerik, name: body, widget: markdown, required: false }
+
+  - name: ekip
+    label: Ekip ve yönetim kurulu
+    label_singular: Kişi
+    folder: _ekip
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{grup}})"
+    sortable_fields: [title, sira, grup]
+    fields:
+      - { label: Ad soyad, name: title, widget: string }
+      - { label: Unvan / görev, name: unvan, widget: string, required: false }
+      - { label: Grup, name: grup, widget: select, options: [Ekip, Yönetim Kurulu], default: Ekip }
+      - { label: Fotoğraf, name: foto, widget: image, required: false }
+      - { label: Sıra, name: sira, widget: number, value_type: int, required: false, hint: "Küçük sayı önce gösterilir" }
+      - { label: E-posta, name: eposta, widget: string, required: false }
+      - { label: LinkedIn adresi, name: linkedin, widget: string, required: false }
+
+  - name: girisimciler
+    label: Girişimcilerimiz
+    label_singular: Girişim
+    folder: _girisimciler
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Girişim adı, name: title, widget: string }
+      - { label: Logo, name: logo, widget: image, required: false }
+      - { label: Alan / sektör, name: alan, widget: string, required: false }
+      - { label: Kurucular, name: kurucular, widget: string, required: false }
+      - { label: Kuruluş yılı, name: kurulus_yili, widget: string, required: false }
+      - { label: Web sitesi, name: web, widget: string, required: false }
+      - { label: Kısa tanıtım, name: ozet, widget: text, required: false }
+      - { label: Ayrıntılı tanıtım, name: body, widget: markdown, required: false }
+
+  - name: patentler
+    label: Patentler
+    label_singular: Patent
+    folder: _patentler
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Patent adı, name: title, widget: string }
+      - { label: Başvuru / tescil no, name: basvuru_no, widget: string, required: false }
+      - { label: Durum, name: durum, widget: select, options: [Başvuru, Tescilli, Lisanslandı, Devredildi], required: false }
+      - { label: Başvuru tarihi, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false, required: false }
+      - { label: Teknoloji alanı, name: alan, widget: string, required: false }
+      - { label: Buluşçular, name: bulucular, widget: string, required: false }
+      - { label: Görsel, name: gorsel, widget: image, required: false }
+      - { label: Açıklama, name: body, widget: markdown, required: false }
+
+  - name: kariyer
+    label: Kariyer ilanları
+    label_singular: İlan
+    folder: _kariyer
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [son_tarih, title]
+    fields:
+      - { label: Pozisyon, name: title, widget: string }
+      - { label: Çalışma türü, name: calisma_turu, widget: select, options: [Tam zamanlı, Yarı zamanlı, Staj, Proje bazlı], required: false }
+      - { label: Konum, name: konum, widget: string, required: false }
+      - { label: Son başvuru tarihi, name: son_tarih, widget: datetime, format: "YYYY-MM-DD", time_format: false, required: false }
+      - { label: Başvuru bağlantısı, name: basvuru_link, widget: string, required: false, hint: "Form adresi veya mailto:eposta@ornek.com" }
+      - { label: İlan metni, name: body, widget: markdown, required: false }
+
   - name: sayfalar
     label: Sayfalar
     label_singular: Sayfa
@@ -92,6 +172,22 @@ collections:
     fields:
       - { label: Sayfa başlığı, name: title, widget: string }
       - { label: Sayfa adresi, name: permalink, widget: string, hint: "Örnek /hizmetler/egitimler/ biçiminde yaz. Menüdeki bağlantıyla aynı olmalı." }
+      - label: Sayfanın altında gösterilecek liste
+        name: liste
+        widget: select
+        required: false
+        hint: "Sayfa metninin altında otomatik bir liste göstermek için seç. Gerekmiyorsa boş bırak."
+        options:
+          - { label: "Ekip üyeleri", value: ekip }
+          - { label: "Yönetim kurulu", value: yonetim }
+          - { label: "Kurumsal işbirlikleri (logolar)", value: isbirlikleri }
+          - { label: "Çözüm ortakları (logolar)", value: cozum-ortaklari }
+          - { label: "Girişimciler", value: girisimciler }
+          - { label: "Girişimcilik fırsatları", value: firsatlar }
+          - { label: "Faaliyet takvimi", value: takvim }
+          - { label: "Patentler", value: patentler }
+          - { label: "Kariyer ilanları", value: kariyer }
+          - { label: "Blog yazıları", value: blog }
       - { label: İçerik, name: body, widget: markdown, required: false }
 
   - name: ayarlar
@@ -127,6 +223,7 @@ collections:
             fields:
               - { label: Etiket, name: etiket, widget: string }
               - { label: Sayı, name: sayi, widget: number, value_type: int }
+              - { label: İkon, name: ikon, widget: image, required: false }
       - name: genel
         label: Genel bilgiler
         file: _data/genel.yml
@@ -137,3 +234,49 @@ collections:
           - { label: Adres, name: adres, widget: text }
           - { label: Telefon, name: telefon, widget: string }
           - { label: E-posta, name: eposta, widget: string }
+          - { label: Logo, name: logo, widget: image, required: false }
+          - { label: Alt kısım tanıtım metni, name: alt_metin, widget: text, required: false }
+          - { label: Instagram adresi, name: instagram, widget: string, required: false }
+          - { label: LinkedIn adresi, name: linkedin, widget: string, required: false }
+          - { label: Facebook adresi, name: facebook, widget: string, required: false }
+          - { label: X (Twitter) adresi, name: x, widget: string, required: false }
+          - { label: YouTube adresi, name: youtube, widget: string, required: false }
+          - { label: Bülten başlığı, name: bulten_baslik, widget: string, required: false }
+          - { label: Bülten kayıt bağlantısı, name: bulten_link, widget: string, required: false, hint: "Örneğin bir Google Form adresi. Boş bırakılırsa bülten alanı görünmez." }
+      - name: isbirlikleri
+        label: Kurumsal işbirlikleri
+        file: _data/isbirlikleri.yml
+        fields:
+          - label: Logolar
+            name: logolar
+            widget: list
+            summary: "{{fields.ad}}"
+            fields:
+              - { label: Kurum adı, name: ad, widget: string }
+              - { label: Logo, name: logo, widget: image, required: false }
+              - { label: Web adresi, name: link, widget: string, required: false }
+      - name: cozum_ortaklari
+        label: Çözüm ortakları
+        file: _data/cozum_ortaklari.yml
+        fields:
+          - label: Logolar
+            name: logolar
+            widget: list
+            summary: "{{fields.ad}}"
+            fields:
+              - { label: Kurum adı, name: ad, widget: string }
+              - { label: Logo, name: logo, widget: image, required: false }
+              - { label: Web adresi, name: link, widget: string, required: false }
+      - name: anasayfa_kutular
+        label: Ana sayfa öne çıkan kutular
+        file: _data/anasayfa_kutular.yml
+        fields:
+          - label: Kutular
+            name: kutular
+            widget: list
+            summary: "{{fields.baslik}}"
+            fields:
+              - { label: Başlık, name: baslik, widget: string }
+              - { label: Metin, name: metin, widget: text, required: false }
+              - { label: İkon, name: ikon, widget: image, required: false }
+              - { label: Bağlantı, name: link, widget: string, required: false }
