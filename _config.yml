@@ -17,6 +17,20 @@ collections:
   duyurular:
     output: true
     permalink: /duyurular/:name/
+  blog:
+    output: true
+    permalink: /blog/:name/
+  girisimciler:
+    output: true
+    permalink: /girisimcilik/girisimcilerimiz/:name/
+  patentler:
+    output: true
+    permalink: /patentler/:name/
+  kariyer:
+    output: true
+    permalink: /kariyer/:name/
+  ekip:
+    output: false
 
 defaults:
   - scope: { path: "", type: cagrilar }
@@ -26,6 +40,14 @@ defaults:
   - scope: { path: "", type: etkinlikler }
     values: { layout: icerik }
   - scope: { path: "", type: duyurular }
+    values: { layout: icerik }
+  - scope: { path: "", type: blog }
+    values: { layout: icerik }
+  - scope: { path: "", type: girisimciler }
+    values: { layout: icerik }
+  - scope: { path: "", type: patentler }
+    values: { layout: icerik }
+  - scope: { path: "", type: kariyer }
     values: { layout: icerik }
   - scope: { path: "sayfalar" }
     values: { layout: sayfa }

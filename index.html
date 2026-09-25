@@ -2,7 +2,9 @@
 layout: default
 title: Ana Sayfa
 ---
+{% assign g = site.data.genel %}
 {% assign duyurular = site.duyurular | sort: "date", "first" | reverse %}
+{% assign slaytlar = site.duyurular | concat: site.ziyaretler | concat: site.etkinlikler | sort: "date", "first" | reverse %}
 
 {% if duyurular.size > 0 %}
 <div class="serit" aria-label="Son duyurular">
@@ -18,15 +20,50 @@ title: Ana Sayfa
 </div>
 {% endif %}
 
+{% if slaytlar.size > 0 %}
+<section class="vitrin" data-kaydirici aria-label="Öne çıkanlar">
+  {% for s in slaytlar limit: 6 %}
+  {% case s.collection %}{% when "duyurular" %}{% assign etiket = "Haber & Duyuru" %}{% when "ziyaretler" %}{% assign etiket = "Firma Ziyareti" %}{% else %}{% assign etiket = "Etkinlik" %}{% endcase %}
+  <article class="slayt vitrin-slayt{% if s.gorsel %} gorselli{% endif %}"{% unless forloop.first %} hidden{% endunless %}>
+    {% if s.gorsel %}<img class="vitrin-gorsel" src="{{ s.gorsel | relative_url }}" alt="">{% endif %}
+    <div class="kap vitrin-ic">
+      <p class="vitrin-etiket">{{ etiket }}</p>
+      <h2><a href="{{ s.url | relative_url }}">{{ s.title }}</a></h2>
+      {% if s.ozet %}<p class="vitrin-ozet">{{ s.ozet }}</p>{% endif %}
+      <a class="dugme sinyal" href="{{ s.url | relative_url }}">Detay</a>
+    </div>
+  </article>
+  {% endfor %}
+  {% if slaytlar.size > 1 %}
+  <div class="kap kaydirici-kontrol vitrin-kontrol">
+    <button type="button" data-onceki aria-label="Önceki">‹</button>
+    <span data-sira></span>
+    <button type="button" data-sonraki aria-label="Sonraki">›</button>
+  </div>
+  {% endif %}
+</section>
+{% else %}
 <section class="giris">
-  <div class="kap giris-ic">
-    <div class="giris-metin">
-      <h1>{{ site.data.genel.slogan }}</h1>
-      <p>{{ site.data.genel.tanitim }}</p>
-      <p class="giris-dugmeler">
-        <a class="dugme" href="{{ '/cagrilar/' | relative_url }}">Açık çağrıları gör</a>
-        <a class="dugme ikincil" href="{{ '/iletisim/' | relative_url }}">Bize ulaşın</a>
-      </p>
+  <div class="kap">
+    <h1>{{ g.slogan }}</h1>
+    <p>{{ g.tanitim }}</p>
+  </div>
+</section>
+{% endif %}
+
+{% if site.cagrilar.size > 0 %}
+<section class="kap blok">
+  <div class="blok-ust">
+    <h2>Açık çağrılar</h2>
+    <a href="{{ '/cagrilar/' | relative_url }}">Tüm çağrılar</a>
+  </div>
+  <div class="cagri-alan">
+    {% assign acik = site.cagrilar | sort: "son_tarih", "last" %}
+    <div>
+      <div class="cagri-dikey" data-cagri-liste data-sadece-acik data-limit="3">
+        {% for c in acik %}{% include cagri-kart.html c=c %}{% endfor %}
+      </div>
+      <p class="bos" data-acik-yok hidden>Şu an açık çağrı yok.</p>
     </div>
     <aside class="yakin" id="yakin-cagri" aria-live="polite">
       <p class="yakin-baslik">En yakın son başvuru</p>
@@ -37,73 +74,85 @@ title: Ana Sayfa
   </div>
   <script type="application/json" id="cagri-verisi">[{% for c in site.cagrilar %}{"t":{{ c.title | jsonify }},"s":"{{ c.son_tarih | date: '%Y-%m-%d' }}","u":{{ c.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
 </section>
+{% endif %}
 
-<section class="sayaclar" aria-label="Faaliyetlerimiz sayılarla">
-  <div class="kap sayac-izgara">
-    <div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.ziyaretler.size }}">{{ site.ziyaretler.size }}</span><span class="sayac-ad">Firma ziyareti</span></div>
-    <div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.etkinlikler.size }}">{{ site.etkinlikler.size }}</span><span class="sayac-ad">Etkinlik</span></div>
-    <div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.cagrilar.size }}">{{ site.cagrilar.size }}</span><span class="sayac-ad">Takip edilen çağrı</span></div>
-    {% for s in site.data.sayaclar.sayaclar %}
-    <div class="sayac"><span class="sayac-sayi" data-sayi="{{ s.sayi }}">{{ s.sayi }}</span><span class="sayac-ad">{{ s.etiket }}</span></div>
+{% assign bloglar = site.blog | sort: "date", "first" | reverse %}
+{% if bloglar.size > 0 %}
+<section class="kap blok">
+  <div class="blok-ust">
+    <h2>Blog yazıları</h2>
+    <a href="{{ '/blog/' | relative_url }}">Tüm bloglar</a>
+  </div>
+  <div class="yazi-izgara">{% for y in bloglar limit: 3 %}{% include yazi-kart.html y=y %}{% endfor %}</div>
+</section>
+{% endif %}
+
+{% assign faaliyetler = site.ziyaretler | concat: site.etkinlikler | sort: "date", "first" | reverse %}
+{% if faaliyetler.size > 0 %}
+<section class="kap blok">
+  <div class="blok-ust">
+    <h2>Tüm faaliyetler</h2>
+    <a href="{{ '/faaliyetler/' | relative_url }}">Tüm faaliyetlerimiz</a>
+  </div>
+  <div class="yazi-izgara">
+    {% for y in faaliyetler limit: 3 %}
+      {% if y.collection == "ziyaretler" %}{% include yazi-kart.html y=y etiket="Firma Ziyareti" %}{% else %}{% include yazi-kart.html y=y etiket="Etkinlik" %}{% endif %}
     {% endfor %}
   </div>
 </section>
+{% endif %}
 
-<section class="kap blok iki-sutun">
-  <div>
-    <div class="blok-ust">
-      <h2>Haberler ve duyurular</h2>
-      <a href="{{ '/duyurular/' | relative_url }}">Tümü</a>
+{% assign manuel = site.data.sayaclar.sayaclar %}
+{% assign sayac_var = false %}
+{% if manuel.size > 0 or site.ziyaretler.size > 0 or site.etkinlikler.size > 0 or site.cagrilar.size > 0 %}{% assign sayac_var = true %}{% endif %}
+{% if sayac_var %}
+<section class="sayaclar" aria-label="Sayılarla faaliyetlerimiz">
+  <div class="kap sayac-izgara">
+    {% for s in manuel %}
+    <div class="sayac">
+      {% if s.ikon %}<img class="sayac-ikon" src="{{ s.ikon | relative_url }}" alt="">{% endif %}
+      <span class="sayac-sayi" data-sayi="{{ s.sayi }}">{{ s.sayi }}</span><span class="sayac-ad">{{ s.etiket }}</span>
     </div>
-    {% if duyurular.size > 0 %}
-    <div class="kaydirici" data-kaydirici>
-      <div class="kaydirici-pencere">
-        {% for d in duyurular limit: 5 %}
-        <article class="slayt{% if forloop.first %} aktif{% endif %}"{% unless forloop.first %} hidden{% endunless %}>
-          {% if d.gorsel %}<img src="{{ d.gorsel | relative_url }}" alt="">{% endif %}
-          <p class="yazi-tarih"><time datetime="{{ d.date | date: '%Y-%m-%d' }}">{{ d.date | date: "%d.%m.%Y" }}</time></p>
-          <h3><a href="{{ d.url | relative_url }}">{{ d.title }}</a></h3>
-          {% if d.ozet %}<p>{{ d.ozet }}</p>{% endif %}
-        </article>
-        {% endfor %}
-      </div>
-      {% if duyurular.size > 1 %}
-      <div class="kaydirici-kontrol">
-        <button type="button" data-onceki aria-label="Önceki haber">‹</button>
-        <span data-sira></span>
-        <button type="button" data-sonraki aria-label="Sonraki haber">›</button>
-      </div>
-      {% endif %}
-    </div>
-    {% else %}
-    <p class="bos">Henüz duyuru yok.</p>
-    {% endif %}
-  </div>
-
-  <div>
-    <div class="blok-ust">
-      <h2>Açık çağrılar</h2>
-      <a href="{{ '/cagrilar/' | relative_url }}">Tümü</a>
-    </div>
-    {% assign acik = site.cagrilar | sort: "son_tarih", "last" %}
-    <div class="cagri-dikey" data-cagri-liste data-sadece-acik data-limit="3">
-      {% for c in acik %}{% include cagri-kart.html c=c %}{% endfor %}
-    </div>
-    <p class="bos" data-acik-yok hidden>Şu an açık çağrı yok.</p>
+    {% endfor %}
+    {% if site.ziyaretler.size > 0 %}<div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.ziyaretler.size }}">{{ site.ziyaretler.size }}</span><span class="sayac-ad">Firma ziyareti</span></div>{% endif %}
+    {% if site.etkinlikler.size > 0 %}<div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.etkinlikler.size }}">{{ site.etkinlikler.size }}</span><span class="sayac-ad">Etkinlik</span></div>{% endif %}
+    {% if site.cagrilar.size > 0 %}<div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.cagrilar.size }}">{{ site.cagrilar.size }}</span><span class="sayac-ad">Takip edilen çağrı</span></div>{% endif %}
   </div>
 </section>
+{% endif %}
 
+{% if site.data.isbirlikleri.logolar.size > 0 %}
 <section class="kap blok">
   <div class="blok-ust">
-    <h2>Son faaliyetler</h2>
-    <a href="{{ '/faaliyetler/' | relative_url }}">Tümü</a>
+    <h2>Kurumsal işbirliklerimiz</h2>
+    <a href="{{ '/kurumsal/kurumsal-isbirlikleri/' | relative_url }}">Tüm işbirlikleri</a>
   </div>
-  {% assign faaliyetler = site.ziyaretler | concat: site.etkinlikler | sort: "date", "first" | reverse %}
-  {% if faaliyetler.size > 0 %}
-  <div class="yazi-izgara">
-    {% for y in faaliyetler limit: 3 %}{% include yazi-kart.html y=y %}{% endfor %}
-  </div>
-  {% else %}
-  <p class="bos">Henüz faaliyet eklenmedi.</p>
-  {% endif %}
+  {% include logo-izgara.html logolar=site.data.isbirlikleri.logolar %}
 </section>
+{% endif %}
+
+{% if site.data.anasayfa_kutular.kutular.size > 0 %}
+<section class="kutular">
+  <div class="kap kutu-izgara">
+    {% for k in site.data.anasayfa_kutular.kutular %}
+    <div class="kutu">
+      {% if k.ikon %}<img class="kutu-ikon" src="{{ k.ikon | relative_url }}" alt="">{% endif %}
+      <h3>{% if k.link and k.link != "" %}<a href="{{ k.link | relative_url }}">{{ k.baslik }}</a>{% else %}{{ k.baslik }}{% endif %}</h3>
+      {% if k.metin %}<p>{{ k.metin }}</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if g.bulten_link and g.bulten_link != "" %}
+<section class="bulten">
+  <div class="kap bulten-ic">
+    <div>
+      <p class="bulten-ust">Bülten</p>
+      <h2>{{ g.bulten_baslik | default: "Yenilikler ve fırsatlardan haberdar olun" }}</h2>
+    </div>
+    <a class="dugme sinyal" href="{{ g.bulten_link }}" target="_blank" rel="noopener">Bültene kayıt ol</a>
+  </div>
+</section>
+{% endif %}
