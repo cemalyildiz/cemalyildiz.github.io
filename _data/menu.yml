@@ -8,8 +8,27 @@ ogeler:
         link: /kurumsal/hakkimizda/
       - baslik: Misyon & Vizyon
         link: /kurumsal/misyon-vizyon/
+      - baslik: Kurumsal Kimlik
+        link: /kurumsal/kurumsal-kimlik/
+      - baslik: Yönetim Kurulu
+        link: /kurumsal/yonetim-kurulu/
       - baslik: Ekibimiz
         link: /kurumsal/ekibimiz/
+      - baslik: Kurumsal İşbirlikleri
+        link: /kurumsal/kurumsal-isbirlikleri/
+      - baslik: Haberler & Duyurular
+        link: /duyurular/
+  - baslik: Girişimcilik
+    link: ""
+    alt:
+      - baslik: Girişimcilerimiz
+        link: /girisimcilik/girisimcilerimiz/
+      - baslik: Çözüm Ortakları
+        link: /girisimcilik/cozum-ortaklari/
+      - baslik: Fırsatlar
+        link: /girisimcilik/firsatlar/
+      - baslik: Programlar ve Destekler
+        link: /girisimcilik/programlar-ve-destekler/
   - baslik: Hizmetler
     link: ""
     alt:
@@ -22,6 +41,10 @@ ogeler:
   - baslik: Faaliyetler
     link: ""
     alt:
+      - baslik: Faaliyetlerimiz
+        link: /faaliyetler/
+      - baslik: Faaliyet Takvimi
+        link: /faaliyetler/faaliyet-takvimi/
       - baslik: Firma Ziyaretleri
         link: /faaliyetler/ziyaretler/
       - baslik: Etkinlikler
@@ -35,7 +58,11 @@ ogeler:
         link: /cagrilar/tubitak/
       - baslik: Uluslararası Çağrılar
         link: /cagrilar/uluslararasi/
-  - baslik: Duyurular
-    link: /duyurular/
+  - baslik: Patentler
+    link: /patentler/
+  - baslik: Kariyer
+    link: /kariyer/
+  - baslik: Blog
+    link: /blog/
   - baslik: İletişim
     link: /iletisim/
