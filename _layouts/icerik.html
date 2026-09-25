@@ -6,12 +6,19 @@ layout: default
     {% when "cagrilar" %}{% assign geri = "/cagrilar/" %}{% assign geri_ad = "Tüm çağrılar" %}
     {% when "ziyaretler" %}{% assign geri = "/faaliyetler/ziyaretler/" %}{% assign geri_ad = "Firma ziyaretleri" %}
     {% when "etkinlikler" %}{% assign geri = "/faaliyetler/etkinlikler/" %}{% assign geri_ad = "Etkinlikler" %}
-    {% else %}{% assign geri = "/duyurular/" %}{% assign geri_ad = "Duyurular" %}
+    {% when "blog" %}{% assign geri = "/blog/" %}{% assign geri_ad = "Blog" %}
+    {% when "girisimciler" %}{% assign geri = "/girisimcilik/girisimcilerimiz/" %}{% assign geri_ad = "Girişimcilerimiz" %}
+    {% when "patentler" %}{% assign geri = "/patentler/" %}{% assign geri_ad = "Patentler" %}
+    {% when "kariyer" %}{% assign geri = "/kariyer/" %}{% assign geri_ad = "Kariyer" %}
+    {% else %}{% assign geri = "/duyurular/" %}{% assign geri_ad = "Haberler & Duyurular" %}
   {% endcase %}
   <p class="geri"><a href="{{ geri | relative_url }}">{{ geri_ad }}</a></p>
+
+  {% if page.collection == "girisimciler" and page.logo %}<img class="girisim-logo buyuk" src="{{ page.logo | relative_url }}" alt="{{ page.title }} logosu">{% endif %}
   <h1>{{ page.title }}</h1>
 
-  {% if page.collection == "cagrilar" %}
+  {% case page.collection %}
+  {% when "cagrilar" %}
   <div class="cagri-bilgi" data-son="{{ page.son_tarih | date: '%Y-%m-%d' }}">
     <dl>
       {% if page.tur %}<dt>Program</dt><dd>{{ page.tur }}</dd>{% endif %}
@@ -22,14 +29,48 @@ layout: default
     </dl>
     {% if page.link %}<a class="dugme" href="{{ page.link }}" target="_blank" rel="noopener">Çağrı sayfasına git</a>{% endif %}
   </div>
+
+  {% when "kariyer" %}
+  <div class="cagri-bilgi"{% if page.son_tarih %} data-son="{{ page.son_tarih | date: '%Y-%m-%d' }}"{% endif %}>
+    <dl>
+      {% if page.calisma_turu %}<dt>Çalışma türü</dt><dd>{{ page.calisma_turu }}</dd>{% endif %}
+      {% if page.konum %}<dt>Konum</dt><dd>{{ page.konum }}</dd>{% endif %}
+      {% if page.son_tarih %}<dt>Son başvuru</dt><dd><time datetime="{{ page.son_tarih | date: '%Y-%m-%d' }}">{{ page.son_tarih | date: "%d.%m.%Y" }}</time> <span class="durum"></span></dd>{% endif %}
+    </dl>
+    {% if page.basvuru_link %}<a class="dugme" href="{{ page.basvuru_link }}" target="_blank" rel="noopener">Başvur</a>{% endif %}
+  </div>
+
+  {% when "patentler" %}
+  <div class="cagri-bilgi">
+    <dl>
+      {% if page.basvuru_no %}<dt>Başvuru / tescil no</dt><dd>{{ page.basvuru_no }}</dd>{% endif %}
+      {% if page.durum %}<dt>Durum</dt><dd>{{ page.durum }}</dd>{% endif %}
+      {% if page.date %}<dt>Başvuru tarihi</dt><dd>{{ page.date | date: "%d.%m.%Y" }}</dd>{% endif %}
+      {% if page.alan %}<dt>Teknoloji alanı</dt><dd>{{ page.alan }}</dd>{% endif %}
+      {% if page.bulucular %}<dt>Buluşçular</dt><dd>{{ page.bulucular }}</dd>{% endif %}
+    </dl>
+  </div>
+  {% if page.gorsel %}<img class="kapak" src="{{ page.gorsel | relative_url }}" alt="">{% endif %}
+
+  {% when "girisimciler" %}
+  <div class="cagri-bilgi">
+    <dl>
+      {% if page.alan %}<dt>Alan</dt><dd>{{ page.alan }}</dd>{% endif %}
+      {% if page.kurucular %}<dt>Kurucular</dt><dd>{{ page.kurucular }}</dd>{% endif %}
+      {% if page.kurulus_yili %}<dt>Kuruluş yılı</dt><dd>{{ page.kurulus_yili }}</dd>{% endif %}
+    </dl>
+    {% if page.web %}<a class="dugme" href="{{ page.web }}" target="_blank" rel="noopener">Web sitesi</a>{% endif %}
+  </div>
+
   {% else %}
   <p class="ust-bilgi">
     <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%d.%m.%Y" }}</time>
     {% if page.firma %}<span>{{ page.firma }}</span>{% endif %}
     {% if page.yer %}<span>{{ page.yer }}</span>{% endif %}
+    {% if page.yazar %}<span>{{ page.yazar }}</span>{% endif %}
   </p>
   {% if page.gorsel %}<img class="kapak" src="{{ page.gorsel | relative_url }}" alt="">{% endif %}
-  {% endif %}
+  {% endcase %}
 
   <div class="metin">
     {{ content }}

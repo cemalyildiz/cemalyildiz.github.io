@@ -12,10 +12,13 @@
 </head>
 <body>
   <a class="atla" href="#icerik">İçeriğe geç</a>
+  {% assign g = site.data.genel %}
 
   <header class="ust">
     <div class="kap ust-ic">
-      <a class="logo" href="{{ '/' | relative_url }}">{{ site.data.genel.site_adi }}</a>
+      <a class="logo" href="{{ '/' | relative_url }}">
+        {% if g.logo and g.logo != "" %}<img src="{{ g.logo | relative_url }}" alt="{{ g.site_adi }}">{% else %}{{ g.site_adi }}{% endif %}
+      </a>
       <button class="menu-dugme" type="button" aria-expanded="false" aria-controls="ana-menu">Menü</button>
       <nav id="ana-menu" class="menu" aria-label="Ana menü">
         <ul class="menu-liste">
@@ -44,18 +47,37 @@
 
   <footer class="alt">
     <div class="kap alt-ic">
-      <div>
-        <p class="alt-baslik">{{ site.data.genel.site_adi }}</p>
-        <p>{{ site.data.genel.slogan }}</p>
+      <div class="alt-marka">
+        <p class="alt-baslik">{% if g.logo and g.logo != "" %}<img src="{{ g.logo | relative_url }}" alt="{{ g.site_adi }}" class="alt-logo">{% else %}{{ g.site_adi }}{% endif %}</p>
+        <p>{% if g.alt_metin and g.alt_metin != "" %}{{ g.alt_metin }}{% else %}{{ g.slogan }}{% endif %}</p>
+        <ul class="sosyal">
+          {% if g.instagram and g.instagram != "" %}<li><a href="{{ g.instagram }}" target="_blank" rel="noopener">Instagram</a></li>{% endif %}
+          {% if g.linkedin and g.linkedin != "" %}<li><a href="{{ g.linkedin }}" target="_blank" rel="noopener">LinkedIn</a></li>{% endif %}
+          {% if g.facebook and g.facebook != "" %}<li><a href="{{ g.facebook }}" target="_blank" rel="noopener">Facebook</a></li>{% endif %}
+          {% if g.x and g.x != "" %}<li><a href="{{ g.x }}" target="_blank" rel="noopener">X</a></li>{% endif %}
+          {% if g.youtube and g.youtube != "" %}<li><a href="{{ g.youtube }}" target="_blank" rel="noopener">YouTube</a></li>{% endif %}
+        </ul>
       </div>
+      {% assign sutun = 0 %}
+      {% for oge in site.data.menu.ogeler %}
+        {% if oge.alt and oge.alt.size > 0 and sutun < 2 %}
+        {% assign sutun = sutun | plus: 1 %}
+        <div>
+          <p class="alt-baslik">{{ oge.baslik }}</p>
+          <ul class="alt-liste">
+            {% for a in oge.alt %}<li><a href="{{ a.link | relative_url }}">{{ a.baslik }}</a></li>{% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      {% endfor %}
       <div>
         <p class="alt-baslik">İletişim</p>
-        <p>{{ site.data.genel.adres }}</p>
-        <p><a href="tel:{{ site.data.genel.telefon | remove: ' ' }}">{{ site.data.genel.telefon }}</a></p>
-        <p><a href="mailto:{{ site.data.genel.eposta }}">{{ site.data.genel.eposta }}</a></p>
+        {% if g.telefon %}<p><a href="tel:{{ g.telefon | remove: ' ' }}">{{ g.telefon }}</a></p>{% endif %}
+        {% if g.eposta %}<p><a href="mailto:{{ g.eposta }}">{{ g.eposta }}</a></p>{% endif %}
+        {% if g.adres %}<p>{{ g.adres }}</p>{% endif %}
       </div>
     </div>
-    <p class="kap telif">© {{ site.time | date: "%Y" }} {{ site.data.genel.site_adi }}</p>
+    <p class="kap telif">© {{ site.time | date: "%Y" }} {{ g.site_adi }}</p>
   </footer>
 
   <script src="{{ '/assets/js/site.js' | relative_url }}"></script>
