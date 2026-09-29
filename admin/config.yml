@@ -23,6 +23,11 @@ collections:
       - { label: Tarih, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
       - { label: Kısa özet, name: ozet, widget: text, required: false }
       - { label: Görsel, name: gorsel, widget: image, required: false }
+      - label: Galeri
+        name: galeri
+        widget: list
+        required: false
+        field: { label: Görsel, name: gorsel, widget: image }
       - { label: İçerik, name: body, widget: markdown, required: false }
 
   - name: cagrilar
@@ -79,6 +84,7 @@ collections:
       - { label: Etkinlik adı, name: title, widget: string }
       - { label: Etkinlik tarihi, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
       - { label: Yer, name: yer, widget: string, required: false }
+      - { label: Saat, name: saat, widget: string, required: false }
       - { label: Kısa özet, name: ozet, widget: text, required: false }
       - { label: Görsel, name: gorsel, widget: image, required: false }
       - { label: Ayrıntılar, name: body, widget: markdown, required: false }
@@ -96,6 +102,11 @@ collections:
       - { label: Yazar, name: yazar, widget: string, required: false }
       - { label: Kısa özet, name: ozet, widget: text, required: false }
       - { label: Kapak görseli, name: gorsel, widget: image, required: false }
+      - label: Galeri
+        name: galeri
+        widget: list
+        required: false
+        field: { label: Görsel, name: gorsel, widget: image }
       - { label: İçerik, name: body, widget: markdown, required: false }
 
   - name: ekip
@@ -112,6 +123,7 @@ collections:
       - { label: Grup, name: grup, widget: select, options: [Ekip, Yönetim Kurulu], default: Ekip }
       - { label: Fotoğraf, name: foto, widget: image, required: false }
       - { label: Sıra, name: sira, widget: number, value_type: int, required: false, hint: "Küçük sayı önce gösterilir" }
+      - { label: Telefon, name: telefon, widget: string, required: false }
       - { label: E-posta, name: eposta, widget: string, required: false }
       - { label: LinkedIn adresi, name: linkedin, widget: string, required: false }
 
@@ -128,6 +140,7 @@ collections:
       - { label: Kurucular, name: kurucular, widget: string, required: false }
       - { label: Kuruluş yılı, name: kurulus_yili, widget: string, required: false }
       - { label: Web sitesi, name: web, widget: string, required: false }
+      - { label: Sıra, name: sira, widget: number, value_type: int, required: false }
       - { label: Kısa tanıtım, name: ozet, widget: text, required: false }
       - { label: Ayrıntılı tanıtım, name: body, widget: markdown, required: false }
 
@@ -163,6 +176,42 @@ collections:
       - { label: Başvuru bağlantısı, name: basvuru_link, widget: string, required: false, hint: "Form adresi veya mailto:eposta@ornek.com" }
       - { label: İlan metni, name: body, widget: markdown, required: false }
 
+  - name: faaliyetler
+    label: Faaliyetler
+    label_singular: Faaliyet
+    folder: _faaliyetler
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Başlık, name: title, widget: string }
+      - { label: Tarih, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - { label: Kısa özet, name: ozet, widget: text, required: false }
+      - { label: Kapak görseli, name: gorsel, widget: image, required: false }
+      - label: Galeri
+        name: galeri
+        widget: list
+        required: false
+        field: { label: Görsel, name: gorsel, widget: image }
+      - { label: İçerik, name: body, widget: markdown, required: false }
+
+  - name: egitimler
+    label: Eğitimler
+    label_singular: Eğitim
+    folder: _egitimler
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Eğitim adı, name: title, widget: string }
+      - { label: Görsel, name: gorsel, widget: image, required: false }
+      - { label: Düzenleyen, name: duzenleyen, widget: string, required: false }
+      - { label: Başvuru tarihi, name: basvuru_tarihi, widget: string, required: false, hint: "Örnek 22 Eylül 2026" }
+      - { label: Süre, name: sure, widget: string, required: false }
+      - { label: Eğitim tipi, name: egitim_tipi, widget: string, required: false }
+      - { label: Fiyat, name: fiyat, widget: string, required: false }
+      - { label: Başvuru bağlantısı, name: basvuru_link, widget: string, required: false }
+      - { label: Açıklama, name: body, widget: markdown, required: false }
+
   - name: sayfalar
     label: Sayfalar
     label_singular: Sayfa
@@ -188,6 +237,10 @@ collections:
           - { label: "Patentler", value: patentler }
           - { label: "Kariyer ilanları", value: kariyer }
           - { label: "Blog yazıları", value: blog }
+          - { label: "Faaliyetler", value: faaliyetler }
+          - { label: "Eğitimler", value: egitimler }
+          - { label: "Fırsat kartları", value: firsat-kartlari }
+          - { label: "Kurumsal kimlik dosyaları", value: kimlik }
       - { label: İçerik, name: body, widget: markdown, required: false }
 
   - name: ayarlar
@@ -235,6 +288,8 @@ collections:
           - { label: Telefon, name: telefon, widget: string }
           - { label: E-posta, name: eposta, widget: string }
           - { label: Logo, name: logo, widget: image, required: false }
+          - { label: Açık renk logo (alt kısım için), name: logo_acik, widget: image, required: false }
+          - { label: Siteyi arama motorlarından gizle, name: arama_gizle, widget: boolean, required: false, default: true }
           - { label: Alt kısım tanıtım metni, name: alt_metin, widget: text, required: false }
           - { label: Instagram adresi, name: instagram, widget: string, required: false }
           - { label: LinkedIn adresi, name: linkedin, widget: string, required: false }
@@ -266,6 +321,7 @@ collections:
             fields:
               - { label: Kurum adı, name: ad, widget: string }
               - { label: Logo, name: logo, widget: image, required: false }
+              - { label: Açıklama, name: aciklama, widget: string, required: false }
               - { label: Web adresi, name: link, widget: string, required: false }
       - name: anasayfa_kutular
         label: Ana sayfa öne çıkan kutular
@@ -279,4 +335,41 @@ collections:
               - { label: Başlık, name: baslik, widget: string }
               - { label: Metin, name: metin, widget: text, required: false }
               - { label: İkon, name: ikon, widget: image, required: false }
+              - { label: Bağlantı, name: link, widget: string, required: false }
+      - name: firsatlar
+        label: Fırsatlar
+        file: _data/firsatlar.yml
+        fields:
+          - label: Fırsat kartları
+            name: kartlar
+            widget: list
+            summary: "{{fields.ad}}"
+            fields:
+              - { label: Başlık, name: ad, widget: string }
+              - { label: Görsel, name: gorsel, widget: image, required: false }
+              - { label: Açıklama, name: aciklama, widget: string, required: false }
+      - name: kurumsal_kimlik
+        label: Kurumsal kimlik dosyaları
+        file: _data/kurumsal_kimlik.yml
+        fields:
+          - label: Dosyalar
+            name: dosyalar
+            widget: list
+            fields:
+              - { label: Önizleme görseli, name: gorsel, widget: image, required: false }
+              - { label: PNG dosyası, name: png, widget: file, required: false }
+              - { label: JPG dosyası, name: jpg, widget: file, required: false }
+              - { label: Vektörel dosya, name: vektorel, widget: file, required: false }
+      - name: vitrin
+        label: Ana sayfa sabit slaytlar
+        file: _data/vitrin.yml
+        fields:
+          - label: Slaytlar
+            name: slaytlar
+            widget: list
+            summary: "{{fields.baslik}}"
+            fields:
+              - { label: Başlık, name: baslik, widget: string }
+              - { label: Metin, name: metin, widget: text, required: false }
+              - { label: Görsel, name: gorsel, widget: image, required: false }
               - { label: Bağlantı, name: link, widget: string, required: false }
