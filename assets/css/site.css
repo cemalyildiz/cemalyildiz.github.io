@@ -291,3 +291,18 @@ h3 a:hover { text-decoration: underline; }
   .cagri-alan, .bulten-ic { grid-template-columns: 1fr; gap: 28px; }
   .cagri-alan .yakin { order: -1; }
 }
+
+/* Kart ızgarası (fırsatlar, çözüm ortakları, eğitimler, kurumsal kimlik) */
+.kart-izgara { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 32px; margin-top: 24px; }
+.kart img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: var(--kagit); border-radius: 4px; margin-bottom: 12px; }
+.kart p { color: var(--soluk); margin: 0 0 6px; }
+.kart-dugmeler { display: flex; flex-wrap: wrap; gap: 8px; }
+.kart-dugmeler .dugme { padding: 6px 14px; font-size: .92rem; }
+.kisi-bilgi { margin: 0 0 2px; color: var(--soluk); font-size: .95rem; overflow-wrap: anywhere; }
+
+/* Galeri */
+.galeri { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 28px; max-width: 70ch; }
+.galeri img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+
+/* Sayfalama */
+.daha-fazla { display: block; margin: 32px auto 0; }
