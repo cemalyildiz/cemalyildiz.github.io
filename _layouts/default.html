@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
+  {% if site.data.genel.arama_gizle %}<meta name="robots" content="noindex, nofollow">{% endif %}
   <title>{% if page.url != "/" and page.title %}{{ page.title }} | {% endif %}{{ site.data.genel.site_adi }}</title>
   <meta name="description" content="{{ page.ozet | default: site.data.genel.slogan | strip_html | truncate: 160 }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +49,7 @@
   <footer class="alt">
     <div class="kap alt-ic">
       <div class="alt-marka">
-        <p class="alt-baslik">{% if g.logo and g.logo != "" %}<img src="{{ g.logo | relative_url }}" alt="{{ g.site_adi }}" class="alt-logo">{% else %}{{ g.site_adi }}{% endif %}</p>
+        <p class="alt-baslik">{% if g.logo_acik and g.logo_acik != "" %}<img src="{{ g.logo_acik | relative_url }}" alt="{{ g.site_adi }}" class="alt-logo">{% elsif g.logo and g.logo != "" %}<img src="{{ g.logo | relative_url }}" alt="{{ g.site_adi }}" class="alt-logo">{% else %}{{ g.site_adi }}{% endif %}</p>
         <p>{% if g.alt_metin and g.alt_metin != "" %}{{ g.alt_metin }}{% else %}{{ g.slogan }}{% endif %}</p>
         <ul class="sosyal">
           {% if g.instagram and g.instagram != "" %}<li><a href="{{ g.instagram }}" target="_blank" rel="noopener">Instagram</a></li>{% endif %}
@@ -61,7 +61,7 @@
       </div>
       {% assign sutun = 0 %}
       {% for oge in site.data.menu.ogeler %}
-        {% if oge.alt and oge.alt.size > 0 and sutun < 2 %}
+        {% if oge.alt and oge.alt.size > 0 and sutun < 2 and oge.baslik != "Girişimcilik" and oge.baslik != "Faaliyetler" %}
         {% assign sutun = sutun | plus: 1 %}
         <div>
           <p class="alt-baslik">{{ oge.baslik }}</p>

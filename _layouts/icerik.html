@@ -7,9 +7,24 @@ layout: default
     {% when "ziyaretler" %}{% assign geri = "/faaliyetler/ziyaretler/" %}{% assign geri_ad = "Firma ziyaretleri" %}
     {% when "etkinlikler" %}{% assign geri = "/faaliyetler/etkinlikler/" %}{% assign geri_ad = "Etkinlikler" %}
     {% when "blog" %}{% assign geri = "/blog/" %}{% assign geri_ad = "Blog" %}
-    {% when "girisimciler" %}{% assign geri = "/girisimcilik/girisimcilerimiz/" %}{% assign geri_ad = "Girişimcilerimiz" %}
+    {% when "egitimler" %}
+  {% if page.gorsel %}<img class="kapak" src="{{ page.gorsel | relative_url }}" alt="">{% endif %}
+  <div class="cagri-bilgi">
+    <dl>
+      {% if page.duzenleyen %}<dt>Düzenleyen</dt><dd>{{ page.duzenleyen }}</dd>{% endif %}
+      {% if page.basvuru_tarihi %}<dt>Başvuru tarihi</dt><dd>{{ page.basvuru_tarihi }}</dd>{% endif %}
+      {% if page.sure %}<dt>Süre</dt><dd>{{ page.sure }}</dd>{% endif %}
+      {% if page.egitim_tipi %}<dt>Eğitim tipi</dt><dd>{{ page.egitim_tipi }}</dd>{% endif %}
+      {% if page.fiyat %}<dt>Fiyat</dt><dd>{{ page.fiyat }}</dd>{% endif %}
+    </dl>
+    {% if page.basvuru_link %}<a class="dugme" href="{{ page.basvuru_link }}" target="_blank" rel="noopener">Başvur</a>{% endif %}
+  </div>
+
+  {% when "girisimciler" %}{% assign geri = "/girisimcilik/girisimcilerimiz/" %}{% assign geri_ad = "Girişimcilerimiz" %}
     {% when "patentler" %}{% assign geri = "/patentler/" %}{% assign geri_ad = "Patentler" %}
     {% when "kariyer" %}{% assign geri = "/kariyer/" %}{% assign geri_ad = "Kariyer" %}
+    {% when "faaliyetler" %}{% assign geri = "/faaliyetler/" %}{% assign geri_ad = "Faaliyetlerimiz" %}
+    {% when "egitimler" %}{% assign geri = "/hizmetler/egitimler/" %}{% assign geri_ad = "Eğitimler" %}
     {% else %}{% assign geri = "/duyurular/" %}{% assign geri_ad = "Haberler & Duyurular" %}
   {% endcase %}
   <p class="geri"><a href="{{ geri | relative_url }}">{{ geri_ad }}</a></p>
@@ -52,6 +67,19 @@ layout: default
   </div>
   {% if page.gorsel %}<img class="kapak" src="{{ page.gorsel | relative_url }}" alt="">{% endif %}
 
+  {% when "egitimler" %}
+  {% if page.gorsel %}<img class="kapak" src="{{ page.gorsel | relative_url }}" alt="">{% endif %}
+  <div class="cagri-bilgi">
+    <dl>
+      {% if page.duzenleyen %}<dt>Düzenleyen</dt><dd>{{ page.duzenleyen }}</dd>{% endif %}
+      {% if page.basvuru_tarihi %}<dt>Başvuru tarihi</dt><dd>{{ page.basvuru_tarihi }}</dd>{% endif %}
+      {% if page.sure %}<dt>Süre</dt><dd>{{ page.sure }}</dd>{% endif %}
+      {% if page.egitim_tipi %}<dt>Eğitim tipi</dt><dd>{{ page.egitim_tipi }}</dd>{% endif %}
+      {% if page.fiyat %}<dt>Fiyat</dt><dd>{{ page.fiyat }}</dd>{% endif %}
+    </dl>
+    {% if page.basvuru_link %}<a class="dugme" href="{{ page.basvuru_link }}" target="_blank" rel="noopener">Başvur</a>{% endif %}
+  </div>
+
   {% when "girisimciler" %}
   <div class="cagri-bilgi">
     <dl>
@@ -75,4 +103,9 @@ layout: default
   <div class="metin">
     {{ content }}
   </div>
+  {% if page.galeri and page.galeri.size > 0 %}
+  <div class="galeri">
+    {% for g in page.galeri %}<a href="{{ g | relative_url }}" target="_blank" rel="noopener"><img src="{{ g | relative_url }}" alt="" loading="lazy"></a>{% endfor %}
+  </div>
+  {% endif %}
 </article>
