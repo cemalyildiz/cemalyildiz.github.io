@@ -4,7 +4,8 @@ title: Ana Sayfa
 ---
 {% assign g = site.data.genel %}
 {% assign duyurular = site.duyurular | sort: "date", "first" | reverse %}
-{% assign slaytlar = site.duyurular | concat: site.ziyaretler | concat: site.etkinlikler | sort: "date", "first" | reverse %}
+{% assign slaytlar = site.duyurular | concat: site.faaliyetler | concat: site.ziyaretler | sort: "date", "first" | reverse %}
+{% assign sabit = site.data.vitrin.slaytlar %}
 
 {% if duyurular.size > 0 %}
 <div class="serit" aria-label="Son duyurular">
@@ -20,10 +21,10 @@ title: Ana Sayfa
 </div>
 {% endif %}
 
-{% if slaytlar.size > 0 %}
+{% if slaytlar.size > 0 or sabit.size > 0 %}
 <section class="vitrin" data-kaydirici aria-label="Öne çıkanlar">
-  {% for s in slaytlar limit: 6 %}
-  {% case s.collection %}{% when "duyurular" %}{% assign etiket = "Haber & Duyuru" %}{% when "ziyaretler" %}{% assign etiket = "Firma Ziyareti" %}{% else %}{% assign etiket = "Etkinlik" %}{% endcase %}
+  {% for s in slaytlar limit: 16 %}
+  {% case s.collection %}{% when "duyurular" %}{% assign etiket = "Haber & Duyuru" %}{% when "ziyaretler" %}{% assign etiket = "Firma Ziyareti" %}{% when "faaliyetler" %}{% assign etiket = "Faaliyetler" %}{% else %}{% assign etiket = "Etkinlik" %}{% endcase %}
   <article class="slayt vitrin-slayt{% if s.gorsel %} gorselli{% endif %}"{% unless forloop.first %} hidden{% endunless %}>
     {% if s.gorsel %}<img class="vitrin-gorsel" src="{{ s.gorsel | relative_url }}" alt="">{% endif %}
     <div class="kap vitrin-ic">
@@ -34,7 +35,18 @@ title: Ana Sayfa
     </div>
   </article>
   {% endfor %}
-  {% if slaytlar.size > 1 %}
+  {% for v in sabit %}
+  <article class="slayt vitrin-slayt{% if v.gorsel %} gorselli{% endif %}"{% if slaytlar.size > 0 or forloop.index > 1 %} hidden{% endif %}>
+    {% if v.gorsel %}<img class="vitrin-gorsel" src="{{ v.gorsel | relative_url }}" alt="">{% endif %}
+    <div class="kap vitrin-ic">
+      <h2>{% if v.link and v.link != "" %}<a href="{{ v.link | relative_url }}">{{ v.baslik }}</a>{% else %}{{ v.baslik }}{% endif %}</h2>
+      {% if v.metin %}<p class="vitrin-ozet">{{ v.metin }}</p>{% endif %}
+      {% if v.link and v.link != "" %}<a class="dugme sinyal" href="{{ v.link | relative_url }}">Detay</a>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+  {% assign toplam_slayt = slaytlar.size | at_most: 16 | plus: sabit.size %}
+  {% if toplam_slayt > 1 %}
   <div class="kap kaydirici-kontrol vitrin-kontrol">
     <button type="button" data-onceki aria-label="Önceki">‹</button>
     <span data-sira></span>
@@ -87,7 +99,7 @@ title: Ana Sayfa
 </section>
 {% endif %}
 
-{% assign faaliyetler = site.ziyaretler | concat: site.etkinlikler | sort: "date", "first" | reverse %}
+{% assign faaliyetler = site.faaliyetler | concat: site.ziyaretler | sort: "date", "first" | reverse %}
 {% if faaliyetler.size > 0 %}
 <section class="kap blok">
   <div class="blok-ust">
@@ -96,16 +108,14 @@ title: Ana Sayfa
   </div>
   <div class="yazi-izgara">
     {% for y in faaliyetler limit: 3 %}
-      {% if y.collection == "ziyaretler" %}{% include yazi-kart.html y=y etiket="Firma Ziyareti" %}{% else %}{% include yazi-kart.html y=y etiket="Etkinlik" %}{% endif %}
+      {% include yazi-kart.html y=y %}
     {% endfor %}
   </div>
 </section>
 {% endif %}
 
 {% assign manuel = site.data.sayaclar.sayaclar %}
-{% assign sayac_var = false %}
-{% if manuel.size > 0 or site.ziyaretler.size > 0 or site.etkinlikler.size > 0 or site.cagrilar.size > 0 %}{% assign sayac_var = true %}{% endif %}
-{% if sayac_var %}
+{% if manuel.size > 0 %}
 <section class="sayaclar" aria-label="Sayılarla faaliyetlerimiz">
   <div class="kap sayac-izgara">
     {% for s in manuel %}
@@ -114,9 +124,6 @@ title: Ana Sayfa
       <span class="sayac-sayi" data-sayi="{{ s.sayi }}">{{ s.sayi }}</span><span class="sayac-ad">{{ s.etiket }}</span>
     </div>
     {% endfor %}
-    {% if site.ziyaretler.size > 0 %}<div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.ziyaretler.size }}">{{ site.ziyaretler.size }}</span><span class="sayac-ad">Firma ziyareti</span></div>{% endif %}
-    {% if site.etkinlikler.size > 0 %}<div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.etkinlikler.size }}">{{ site.etkinlikler.size }}</span><span class="sayac-ad">Etkinlik</span></div>{% endif %}
-    {% if site.cagrilar.size > 0 %}<div class="sayac"><span class="sayac-sayi" data-sayi="{{ site.cagrilar.size }}">{{ site.cagrilar.size }}</span><span class="sayac-ad">Takip edilen çağrı</span></div>{% endif %}
   </div>
 </section>
 {% endif %}

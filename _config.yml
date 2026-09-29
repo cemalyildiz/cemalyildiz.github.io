@@ -29,6 +29,12 @@ collections:
   kariyer:
     output: true
     permalink: /kariyer/:name/
+  faaliyetler:
+    output: true
+    permalink: /faaliyet/:name/
+  egitimler:
+    output: true
+    permalink: /egitimler/:name/
   ekip:
     output: false
 
@@ -49,9 +55,15 @@ defaults:
     values: { layout: icerik }
   - scope: { path: "", type: kariyer }
     values: { layout: icerik }
+  - scope: { path: "", type: faaliyetler }
+    values: { layout: icerik }
+  - scope: { path: "", type: egitimler }
+    values: { layout: icerik }
   - scope: { path: "sayfalar" }
     values: { layout: sayfa }
 
 exclude:
+  - _araclar
+  - _import
   - README.md
   - .pages.yml
