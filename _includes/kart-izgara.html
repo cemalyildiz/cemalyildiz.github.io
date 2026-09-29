@@ -1,0 +1,12 @@
+{% if include.kartlar and include.kartlar.size > 0 %}
+<div class="kart-izgara">
+  {% for k in include.kartlar %}
+  {% assign gorsel = k[include.gorsel_alani] %}
+  <article class="kart">
+    {% if gorsel and gorsel != "" %}<img src="{{ gorsel | relative_url }}" alt="" loading="lazy">{% endif %}
+    <h3>{% if k.link and k.link != "" %}<a href="{{ k.link }}" target="_blank" rel="noopener">{{ k.ad }}</a>{% else %}{{ k.ad }}{% endif %}</h3>
+    {% if k.aciklama and k.aciklama != "" %}<p>{{ k.aciklama }}</p>{% endif %}
+  </article>
+  {% endfor %}
+</div>
+{% endif %}

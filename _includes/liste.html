@@ -11,10 +11,9 @@
       {% if k.foto %}<img src="{{ k.foto | relative_url }}" alt="{{ k.title }}" loading="lazy">{% else %}<div class="kisi-bos" aria-hidden="true">{{ k.title | slice: 0 }}</div>{% endif %}
       <h3>{{ k.title }}</h3>
       {% if k.unvan %}<p class="kisi-unvan">{{ k.unvan }}</p>{% endif %}
-      <p class="kisi-baglanti">
-        {% if k.eposta %}<a href="mailto:{{ k.eposta }}">E-posta</a>{% endif %}
-        {% if k.linkedin %}<a href="{{ k.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
-      </p>
+      {% if k.telefon and k.telefon != "" %}<p class="kisi-bilgi">{{ k.telefon }}</p>{% endif %}
+      {% if k.eposta and k.eposta != "" %}<p class="kisi-bilgi"><a href="mailto:{{ k.eposta }}">{{ k.eposta }}</a></p>{% endif %}
+      {% if k.linkedin and k.linkedin != "" %}<p class="kisi-bilgi"><a href="{{ k.linkedin }}" target="_blank" rel="noopener">LinkedIn</a></p>{% endif %}
     </article>
     {% endfor %}
   </div>
@@ -25,19 +24,62 @@
   {% if site.data.isbirlikleri.logolar.size == 0 %}{{ bos }}{% endif %}
 
 {% when "cozum-ortaklari" %}
-  {% include logo-izgara.html logolar=site.data.cozum_ortaklari.logolar %}
+  {% include kart-izgara.html kartlar=site.data.cozum_ortaklari.logolar gorsel_alani="logo" %}
   {% if site.data.cozum_ortaklari.logolar.size == 0 %}{{ bos }}{% endif %}
 
+{% when "firsat-kartlari" %}
+  {% include kart-izgara.html kartlar=site.data.firsatlar.kartlar gorsel_alani="gorsel" %}
+  {% if site.data.firsatlar.kartlar.size == 0 %}{{ bos }}{% endif %}
+
+{% when "kimlik" %}
+  {% assign dosyalar = site.data.kurumsal_kimlik.dosyalar %}
+  {% if dosyalar.size > 0 %}
+  <div class="kart-izgara">
+    {% for d in dosyalar %}
+    <article class="kart">
+      {% if d.gorsel %}<img src="{{ d.gorsel | relative_url }}" alt="" loading="lazy">{% endif %}
+      <p class="kart-dugmeler">
+        {% if d.png %}<a class="dugme" href="{{ d.png | relative_url }}" download>PNG</a>{% endif %}
+        {% if d.jpg %}<a class="dugme" href="{{ d.jpg | relative_url }}" download>JPG</a>{% endif %}
+        {% if d.vektorel %}<a class="dugme" href="{{ d.vektorel | relative_url }}" download>Vektörel</a>{% endif %}
+      </p>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}{{ bos }}{% endif %}
+
+{% when "egitimler" %}
+  {% assign liste = site.egitimler | sort: "title" %}
+  {% if liste.size > 0 %}
+  <div class="kart-izgara">
+    {% for e in liste %}
+    <article class="kart">
+      {% if e.gorsel %}<a href="{{ e.url | relative_url }}" tabindex="-1"><img src="{{ e.gorsel | relative_url }}" alt="" loading="lazy"></a>{% endif %}
+      <h3><a href="{{ e.url | relative_url }}">{{ e.title }}</a></h3>
+      <a class="devam" href="{{ e.url | relative_url }}">Detay</a>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}{{ bos }}{% endif %}
+
+{% when "faaliyetler" %}
+  {% assign liste = site.faaliyetler | concat: site.ziyaretler | sort: "date", "first" | reverse %}
+  {% if liste.size > 0 %}
+  <div class="yazi-izgara" data-sayfala="12">{% for y in liste %}{% include yazi-kart.html y=y %}{% endfor %}</div>
+  {% else %}{{ bos }}{% endif %}
+
 {% when "girisimciler" %}
-  {% assign liste = site.girisimciler | sort: "title" %}
+  {% assign liste = site.girisimciler | sort: "sira", "last" %}
   {% if liste.size > 0 %}
   <div class="girisim-izgara">
     {% for gi in liste %}
     <article class="girisim">
       {% if gi.logo %}<img class="girisim-logo" src="{{ gi.logo | relative_url }}" alt="{{ gi.title }} logosu" loading="lazy">{% endif %}
-      <h3><a href="{{ gi.url | relative_url }}">{{ gi.title }}</a></h3>
+      {% assign gi_icerik = gi.content | strip_html | strip %}
+      <h3>{% if gi_icerik != "" %}<a href="{{ gi.url | relative_url }}">{{ gi.title }}</a>{% else %}{{ gi.title }}{% endif %}</h3>
       {% if gi.alan %}<p class="rozet">{{ gi.alan }}</p>{% endif %}
       {% if gi.ozet %}<p>{{ gi.ozet }}</p>{% endif %}
+      {% if gi.web and gi.web != "" %}<p><a href="{{ gi.web }}" target="_blank" rel="noopener">{{ gi.web }}</a></p>{% endif %}
     </article>
     {% endfor %}
   </div>
@@ -114,7 +156,7 @@
 {% when "blog" %}
   {% assign liste = site.blog | sort: "date", "first" | reverse %}
   {% if liste.size > 0 %}
-  <div class="yazi-izgara">{% for y in liste %}{% include yazi-kart.html y=y %}{% endfor %}</div>
+  <div class="yazi-izgara" data-sayfala="12">{% for y in liste %}{% include yazi-kart.html y=y %}{% endfor %}</div>
   {% else %}{{ bos }}{% endif %}
 
 {% endcase %}
