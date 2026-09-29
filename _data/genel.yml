@@ -1,16 +1,17 @@
-site_adi: Çağrı ve Proje Takip Platformu
+site_adi: GTÜ TTO
 slogan: TÜBİTAK ve uluslararası çağrılar, firma ziyaretleri ve etkinlikler tek yerde
 tanitim: Sanayi firmalarının Ar-Ge ve yenilik destek çağrılarını kaçırmaması için açık çağrıları, son başvuru tarihlerini ve faaliyetlerimizi burada paylaşıyoruz.
-adres: Adres bilgisi buraya
-telefon: +90 000 000 00 01
-eposta: ornek@eposta.com
-logo: ""
-alt_metin: ""
-instagram: ""
-linkedin: ""
-facebook: ""
-x: ""
-youtube: ""
+adres: Cumhuriyet Mah. Gebze Teknik Üniversitesi 41400 Gebze/Kocaeli
+telefon: +(90) 262 605 24 37
+eposta: tto@gtu.edu.tr
+logo: /assets/img/gtutto/images/gtu-tto-logo.png
+alt_metin: Bilgiyi Güce, Araştırmayı Değere Dönüştürüyoruz! Üniversite-sanayi işbirliğiyle, yenilikçi projeleri hayata geçirerek ülkemizin bilgi birikimine ve ekonomisine katkı sağlıyoruz.
+instagram: https://www.instagram.com/gtu.tto/
+linkedin: https://www.linkedin.com/company/gtu-tto/home/
+facebook: https://www.facebook.com/gebzetto41
+x: ''
+youtube: ''
 bulten_baslik: Yenilikler ve fırsatlardan haberdar olun
-bulten_link: ""
+bulten_link: ''
 arama_gizle: true
+logo_acik: /assets/img/gtutto/images/gtu-tto-logo-light.png

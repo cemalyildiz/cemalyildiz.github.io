@@ -1,1 +1,8 @@
-dosyalar: []
+dosyalar:
+- gorsel: /assets/img/gtutto/kurumsal-kimlik/gtu-logo.jpg
+  png: /assets/dosyalar/gtutto/kurumsal-kimlik/gtu-png.png
+  jpg: /assets/dosyalar/gtutto/kurumsal-kimlik/gtu-jpeg.jpg
+- gorsel: /assets/img/gtutto/kurumsal-kimlik/tto-logo.jpg
+  png: /assets/dosyalar/gtutto/kurumsal-kimlik/tto-png.png
+  jpg: /assets/dosyalar/gtutto/kurumsal-kimlik/tto-jpeg.jpg
+  vektorel: /assets/dosyalar/gtutto/kurumsal-kimlik/tto-svg.pdf

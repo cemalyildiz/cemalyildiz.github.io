@@ -1,1 +1,9 @@
-slaytlar: []
+slaytlar:
+- baslik: BIGGbio Uygulayıcı Kuruluşuyuz
+  metin: BIGGbio uygulayıcı kuruluşu olarak, girişimcilere biyoteknoloji alanında yenilikçi projelerini hayata geçirmeleri için destek sunuyoruz.
+  gorsel: /assets/img/gtutto/slider/bigg-bio-slider.jpg
+  link: /girisimcilik/biggbio/
+- baslik: İnovasyonu Destekleyen Köprü
+  metin: Gebze Teknik Üniversitesi Teknoloji Transfer Ofisi, akademik çalışmaların sanayi ile buluşmasını sağlayarak, yenilikçi projelerin ticarileşmesini ve girişimcilik ekosisteminin gelişmesini destekler.
+  gorsel: /assets/img/gtutto/slider/gtu-tto.jpg
+  link: /hizmetler/tto/

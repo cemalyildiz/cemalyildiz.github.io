@@ -1,3 +1,13 @@
 sayaclar:
-  - etiket: Desteklenen proje
-    sayi: 3
+- etiket: Üniversite & Sanayi İşbirliği
+  sayi: 1260
+  ikon: /assets/img/gtutto/sayaclar/isletme.png
+- etiket: Girişimci Projeler
+  sayi: 22
+  ikon: /assets/img/gtutto/sayaclar/girisim.png
+- etiket: TÜBİTAK 1831 YEŞİL DÖNÜŞÜM PROJESİ (KABUL EDİLEN)
+  sayi: 97
+  ikon: /assets/img/gtutto/sayaclar/uluslararasi.png
+- etiket: KÜMELENME DESTEK PROGRAMI (BİKÜME) -KATILIMCI ÜYE SAYISI
+  sayi: 69
+  ikon: /assets/img/gtutto/sayaclar/isbirligi.png

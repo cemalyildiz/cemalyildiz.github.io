@@ -1,1 +1,31 @@
-kartlar: []
+kartlar:
+- ad: Girişimciler için AWS
+  gorsel: /assets/img/gtutto/firsatlar/aws-logo.jpg
+  aciklama: 100.000 $ AWS Activate kredisi
+- ad: Girişimciler için Oracle Software
+  gorsel: /assets/img/gtutto/firsatlar/oracle.jpg
+  aciklama: Daima Ücretsiz bulut hizmetleri de dahil olmak üzere çok çeşitli OCI hizmetlerine erişim imkanı.
+- ad: Girişimciler için Microsoft
+  gorsel: /assets/img/gtutto/firsatlar/microsoft-logo.jpg
+  aciklama: 150.000 $'a varan Azure kredisi
+- ad: Girişimciler için HubSpot
+  gorsel: /assets/img/gtutto/firsatlar/hubspot-logo.jpg
+  aciklama: Tüm araçlarda %30 - %75  indirim.
+- ad: Girişimciler için Segment
+  gorsel: /assets/img/gtutto/firsatlar/twilio-logo.jpg
+  aciklama: İki yıla kadar ücretsiz olarak ekip planına (25.000 $'a kadar) tam erişim imkanı.
+- ad: Girişimciler için Notion
+  gorsel: /assets/img/gtutto/firsatlar/notion-logo.jpg
+  aciklama: Sınırsız AI dahil olmak üzere 6 aya kadar ücretsiz kullanım
+- ad: Girişimciler için GitHub
+  gorsel: /assets/img/gtutto/firsatlar/github-logo.jpg
+  aciklama: 20 adede kadar GitHub Enterprise lisansı 12 ay boyunca ücretsiz.
+- ad: Girişimciler için Zendesk
+  gorsel: /assets/img/gtutto/firsatlar/zendesk-logo.jpg
+  aciklama: Nitelikli erken aşamadaki girişimler için altı ay boyunca ücretsiz Zendesk.
+- ad: Girişimciler için MongoDB
+  gorsel: /assets/img/gtutto/firsatlar/mongo-logo.jpg
+  aciklama: 500$ MongoDB Atlas kredisi ve bir Teknik Danışmanla birebir danışmanlık
+- ad: Mizan Sigorta
+  gorsel: /assets/img/gtutto/firsatlar/mizan-logo.jpg
+  aciklama: Özel Sağlık, Grup Özel Sağlık, Grup Tamamlayıcı Sağlık, İşyeri, Konut ve Kasko Sigortalarında %5 ila %10 arasında özel indirimler sunuyoruz.

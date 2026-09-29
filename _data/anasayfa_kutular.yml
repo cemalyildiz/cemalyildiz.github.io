@@ -1,1 +1,13 @@
-kutular: []
+kutular:
+- baslik: Üniversite & Sanayi İşbirliği
+  metin: Ülkemizin kalkınması adına Üniversite & Sanayi işbirliği kapsamındaki tüm projeleri önemsiyoruz.
+  ikon: /assets/img/gtutto/anasayfa-kutular/imalat.png
+  link: ''
+- baslik: Girişim Projeleri
+  metin: Girişimcilerimize projelerinde; mentörlük, pazarlama ve satış noktalarında destek ve katkılar sağlıyoruz.
+  ikon: /assets/img/gtutto/anasayfa-kutular/arge.png
+  link: ''
+- baslik: Uluslararası Projeler
+  metin: Uluslararası arenalarda yer almamızı ve topluma fayda sağlayan tüm projelerde yer alıyoruz.
+  ikon: /assets/img/gtutto/anasayfa-kutular/danismanlik.png
+  link: ''

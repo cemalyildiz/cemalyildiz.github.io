@@ -1,5 +1,5 @@
 ---
 title: Fırsatlar
 permalink: /girisimcilik/firsatlar/
-liste: firsatlar
+liste: firsat-kartlari
 ---

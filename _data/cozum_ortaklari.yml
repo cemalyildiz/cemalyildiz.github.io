@@ -1,1 +1,13 @@
-logolar: []
+logolar:
+- ad: Havelsan
+  logo: /assets/img/gtutto/ortaklar/havelsan.jpg
+  aciklama: Hava Teknolojileri Girişimlerine Destek İmkanı
+  link: ''
+- ad: Fonla Büyüsün
+  logo: /assets/img/gtutto/ortaklar/fonla-buyusun.jpg
+  aciklama: Kitlesel Fonlama Platformu İle Prototip Aşamasını Tamamlamış Girişimcilere Fon İmkanı
+  link: ''
+- ad: Halk Yatırım
+  logo: /assets/img/gtutto/ortaklar/halk-yatirim.jpg
+  aciklama: Girişimcilerin Projelerine Fon Desteği
+  link: ''

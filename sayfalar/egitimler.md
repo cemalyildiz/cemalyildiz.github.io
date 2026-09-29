@@ -1,5 +1,5 @@
 ---
 title: Eğitimler
 permalink: /hizmetler/egitimler/
+liste: egitimler
 ---
-Düzenlediğiniz eğitimleri burada tanıtın.
