@@ -1,8 +1,5 @@
 ---
 layout: sayfa
-title: Faaliyetler
+title: Faaliyetlerimiz
+liste: faaliyetler
 ---
-{% assign faaliyetler = site.ziyaretler | concat: site.etkinlikler | sort: "date", "first" | reverse %}
-{% if faaliyetler.size > 0 %}
-<div class="yazi-izgara">{% for y in faaliyetler %}{% include yazi-kart.html y=y %}{% endfor %}</div>
-{% else %}<p class="bos">Henüz faaliyet eklenmedi.</p>{% endif %}
