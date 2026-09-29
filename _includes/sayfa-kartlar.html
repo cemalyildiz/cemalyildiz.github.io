@@ -1,0 +1,17 @@
+<section class="sayfa-kartlar{% if include.ustte %} ustte{% endif %}">
+  {% if page.kartlar_baslik and page.kartlar_baslik != "" %}
+  <div class="sayfa-kartlar-ust">
+    <h2>{{ page.kartlar_baslik }}</h2>
+    {% if page.kartlar_aciklama and page.kartlar_aciklama != "" %}<p>{{ page.kartlar_aciklama }}</p>{% endif %}
+  </div>
+  {% endif %}
+  <div class="ilke-izgara">
+    {% for k in page.kartlar %}
+    <article class="ilke">
+      {% if k.ikon and k.ikon != "" %}<img class="ilke-ikon" src="{{ k.ikon | relative_url }}" alt="">{% else %}<span class="ilke-no" aria-hidden="true">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>{% endif %}
+      <h3>{{ k.baslik }}</h3>
+      {% if k.metin %}<p>{{ k.metin }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
