@@ -3,12 +3,21 @@ layout: default
 ---
 <div class="kap sayfa">
   <h1>{{ page.title }}</h1>
+  {% if page.kartlar and page.kartlar.size > 0 and page.kartlar_ustte %}{% include sayfa-kartlar.html ustte=true %}{% endif %}
   {% assign icerik_bos = content | strip_html | strip %}
   {% if icerik_bos != "" or content contains "<img" %}
-  <div class="metin">
-    {{ content }}
-  </div>
+    {% if page.gorsel and page.gorsel != "" %}
+    <div class="sayfa-giris">
+      <div class="metin">{{ content }}</div>
+      <img src="{{ page.gorsel | relative_url }}" alt="">
+    </div>
+    {% else %}
+    <div class="metin">
+      {{ content }}
+    </div>
+    {% endif %}
   {% endif %}
+  {% if page.kartlar and page.kartlar.size > 0 and page.kartlar_ustte != true %}{% include sayfa-kartlar.html %}{% endif %}
   {% if page.liste and page.liste != "" %}
     {% include liste.html tur=page.liste %}
   {% endif %}
