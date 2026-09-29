@@ -1,8 +1,8 @@
 ---
 layout: sayfa
-title: Duyurular
+title: Haberler & Duyurular
 ---
 {% assign liste = site.duyurular | sort: "date", "first" | reverse %}
 {% if liste.size > 0 %}
-<div class="yazi-izgara">{% for y in liste %}{% include yazi-kart.html y=y %}{% endfor %}</div>
+<div class="yazi-izgara" data-sayfala="12">{% for y in liste %}{% include yazi-kart.html y=y %}{% endfor %}</div>
 {% else %}<p class="bos">Henüz duyuru yok.</p>{% endif %}
