@@ -6,8 +6,6 @@ ogeler:
     alt:
       - baslik: Hakkımızda
         link: /kurumsal/hakkimizda/
-      - baslik: Misyon & Vizyon
-        link: /kurumsal/misyon-vizyon/
       - baslik: Kurumsal Kimlik
         link: /kurumsal/kurumsal-kimlik/
       - baslik: Yönetim Kurulu
@@ -27,15 +25,15 @@ ogeler:
         link: /girisimcilik/cozum-ortaklari/
       - baslik: Fırsatlar
         link: /girisimcilik/firsatlar/
+      - baslik: BiggBio
+        link: /girisimcilik/biggbio/
       - baslik: Programlar ve Destekler
         link: /girisimcilik/programlar-ve-destekler/
   - baslik: Hizmetler
     link: ""
     alt:
-      - baslik: Proje Danışmanlığı
-        link: /hizmetler/proje-danismanligi/
-      - baslik: Çağrı Takibi
-        link: /hizmetler/cagri-takibi/
+      - baslik: TTO
+        link: /hizmetler/tto/
       - baslik: Eğitimler
         link: /hizmetler/egitimler/
   - baslik: Faaliyetler
@@ -45,19 +43,8 @@ ogeler:
         link: /faaliyetler/
       - baslik: Faaliyet Takvimi
         link: /faaliyetler/faaliyet-takvimi/
-      - baslik: Firma Ziyaretleri
-        link: /faaliyetler/ziyaretler/
-      - baslik: Etkinlikler
-        link: /faaliyetler/etkinlikler/
-  - baslik: Çağrılar
-    link: ""
-    alt:
-      - baslik: Tüm Çağrılar
-        link: /cagrilar/
-      - baslik: TÜBİTAK Çağrıları
-        link: /cagrilar/tubitak/
-      - baslik: Uluslararası Çağrılar
-        link: /cagrilar/uluslararasi/
+  - baslik: Yeşil İnovasyon
+    link: /faaliyet/1831-yesil-inovasyon-teknoloji-mentorluk-programi-cozum-ortagi/
   - baslik: Patentler
     link: /patentler/
   - baslik: Kariyer
