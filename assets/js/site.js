@@ -106,6 +106,25 @@
     if (gecmisler.length === ogeler.length) t.querySelector('[data-yaklasan-yok]').hidden = false;
   });
 
+  // Uzun listeler: 12'şer göster
+  document.querySelectorAll('[data-sayfala]').forEach(function (liste) {
+    var adim = parseInt(liste.getAttribute('data-sayfala'), 10) || 12;
+    var ogeler = Array.prototype.slice.call(liste.children);
+    if (ogeler.length <= adim) return;
+    var gosterilen = adim;
+    ogeler.forEach(function (o, i) { if (i >= adim) o.hidden = true; });
+    var dugme = document.createElement('button');
+    dugme.type = 'button'; dugme.className = 'dugme ikincil daha-fazla';
+    function yazi() { dugme.textContent = 'Daha fazla göster (' + (ogeler.length - gosterilen) + ')'; }
+    yazi();
+    dugme.addEventListener('click', function () {
+      ogeler.slice(gosterilen, gosterilen + adim).forEach(function (o) { o.hidden = false; });
+      gosterilen += adim;
+      if (gosterilen >= ogeler.length) dugme.remove(); else yazi();
+    });
+    liste.parentNode.insertBefore(dugme, liste.nextSibling);
+  });
+
   // Sayaçlar: görünür olunca sayarak artsın
   var azHareket = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var sayilar = document.querySelectorAll('.sayac-sayi');
